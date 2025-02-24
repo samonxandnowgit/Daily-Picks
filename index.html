@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Daily Picks</title>
+  <style>
+    body {
+      font-family: 'Courier New', Courier, monospace; /* Default for movies */
+      text-align: center;
+      background-color: #f5d76e; /* Mustard yellow for movie tab */
+      padding: 40px;
+      margin: 0;
+    }
+
+    /* Tab navigation */
+    .tab {
+      overflow: hidden;
+      border-bottom: 4px solid #d35400;
+    }
+    .tab button {
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #e74c3c;
+      color: #fff8dc;
+      float: left;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 20px;
+      font-size: 18px;
+      transition: 0.3s;
+    }
+    .tab button:hover {
+      background-color: #c0392b;
+    }
+    .tab button.active {
+      background-color: #d35400;
+    }
+
+    /* Tab content */
+    .tabcontent {
+      display: none;
+      padding: 20px;
+    }
+
+    /* Movie of the Day (1970s Style) */
+    #movie-tab {
+      background-color: #f5d76e;
+      color: #4a2c0f;
+    }
+    #movie-tab h1 {
+      font-size: 48px;
+      color: #e67e22;
+      text-shadow: 2px 2px #2c3e50;
+    }
+    .movie-box {
+      background-color: #f0c27b;
+      padding: 20px;
+      border: 4px solid #d35400;
+      border-radius: 10px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    #movie-tab h2 {
+      font-size: 32px;
+      color: #8e44ad;
+    }
+    #movie-tab p {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    #movie-tab img {
+      max-width: 300px;
+      height: auto;
+      border: 3px solid #4a2c0f;
+      margin-bottom: 20px;
+    }
+    #movie-tab button {
+      background-color: #e74c3c;
+      color: #fff8dc;
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #movie-tab button:hover {
+      background-color: #c0392b;
+    }
+
+    /* Girl of the Day (Vegas Style) */
+    #girl-tab {
+      background-color: #1a0d2b; /* Dark purple, Vegas night vibe */
+      color: #ffd700; /* Gold text */
+      font-family: 'Impact', sans-serif; /* Bold, Vegas-style font */
+    }
+    #girl-tab h1 {
+      font-size: 60px;
+      color: #ff00ff; /* Neon magenta */
+      text-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff, 0 0 30px #00ffff; /* Neon glow */
+    }
+    .girl-box {
+      background-color: #2e1a47; /* Slightly lighter purple */
+      padding: 20px;
+      border: 5px dashed #00ffff; /* Cyan dashed border, Vegas flash */
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    #girl-tab h2 {
+      font-size: 40px;
+      color: #00ff00; /* Neon green */
+      text-transform: uppercase;
+    }
+    #girl-tab p {
+      font-size: 20px;
+      line-height: 1.5;
+    }
+    #girl-tab img {
+      max-width: 300px;
+      height: auto;
+      border: 4px solid #ffd700;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px #ff00ff; /* Neon glow around photo */
+    }
+    #girl-tab button {
+      font-family: 'Impact', sans-serif;
+      font-size: 22px;
+      padding: 12px 25px;
+      background-color: #ff00ff; /* Magenta button */
+      color: #000;
+      border: 3px solid #00ffff; /* Cyan border */
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+    #girl-tab button:hover {
+      background-color: #00ff00; /* Green on hover */
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'movie-tab')" id="defaultOpen">Movie of the Day</button>
+    <button class="tablinks" onclick="openTab(event, 'girl-tab')">Girl of the Day</button>
+  </div>
+
+  <!-- Movie Tab -->
+  <div id="movie-tab" class="tabcontent">
+    <h1>Movie of the Day</h1>
+    <div class="movie-box">
+      <img id="movie-poster" src="https://via.placeholder.com/300x450" alt="Movie Poster">
+      <h2 id="movie-title">Loading...</h2>
+      <p id="movie-desc">One moment, picking your daily flick!</p>
+      <p><strong>Why Watch It:</strong> <span id="movie-reason">Hang tight!</span></p>
+      <button onclick="generateNextMovie()">Generate Next</button>
+    </div>
+  </div>
+
+  <!-- Girl Tab -->
+  <div id="girl-tab" class="tabcontent">
+    <h1>Girl of the Day</h1>
+    <div class="girl-box">
+      <img id="girl-photo" src="https://via.placeholder.com/300x450" alt="Celebrity Photo">
+      <h2 id="girl-name">Loading...</h2>
+      <p id="girl-desc">One sec, finding your daily gal!</p>
+      <p><strong>Why She’s Fab:</strong> <span id="girl-reason">Hold on tight!</span></p>
+      <button onclick="generateNextGirl()">Generate Next</button>
+    </div>
+  </div>
+
+  <script>
+    // Movie Data
+    const movies = [
+      { title: "The Shawshank Redemption", desc: "Two imprisoned men bond over years, finding solace and redemption through acts of decency.", reason: "A timeless story of hope that hits you right in the feels.", poster: "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_.jpg" },
+      { title: "Inception", desc: "A thief with the ability to enter dreams must pull off the ultimate heist.", reason: "Mind-bending twists that'll keep you guessing all day.", poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_.jpg" },
+      { title: "The Grand Budapest Hotel", desc: "A concierge and his lobby boy get tangled in a wild adventure over a priceless painting.", reason: "Quirky, colorful, and a visual treat—perfect for a fun escape.", poster: "https://m.media-amazon.com/images/M/MV5BMzM5NjUxOTEyMl5BMl5BanBnXkFtZTgwNjEyMDM0MDE@._V1_.jpg" },
+      { title: "Mad Max: Fury Road", desc: "In a post-apocalyptic wasteland, a drifter teams up with a rebel to outrun a tyrant.", reason: "Non-stop action that’ll get your adrenaline pumping.", poster: "https://m.media-amazon.com/images/M/MV5BN2EwM2I5OWMtMGQyMi00Zjg1LWJkNTctZTdjYTA4OGUwMmRkXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg" },
+      { title: "Spirited Away", desc: "A young girl navigates a magical world to save her parents.", reason: "A stunning animated journey that’s pure imagination fuel.", poster: "https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctNDE2YS00YWE0LWE5ZWItZDBhYWQ0NTcxNWRhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg" }
+    ];
+
+    // Girl Data
+    const girls = [
+      { name: "Scarlett Johansson", desc: "Born 1984, this actress is known for her roles in Marvel films and indie gems alike.", reason: "Her charisma and talent light up any screen she’s on.", photo: "https://m.media-amazon.com/images/M/MV5BMTM3OTUwMDYwNl5BMl5BanBnXkFtZTcwNTUyNzc3Nw@@._V1_.jpg", age: 40 },
+      { name: "Margot Robbie", desc: "Born 1990, she’s an Aussie star who shines in everything from blockbusters to dramas.", reason: "Her bold energy and charm are totally far out.", photo: "https://m.media-amazon.com/images/M/MV5BMTgxNDcwMzU2Nl5BMl5BanBnXkFtZTcwNDczMzMjNA@@._V1_.jpg", age: 34 },
+      { name: "Natalie Portman", desc: "Born 1981, an Oscar-winner with a knack for intense, stunning performances.", reason: "Her grace and smarts make her a cosmic beauty.", photo: "https://m.media-amazon.com/images/M/MV5BMTQ3ODE3Mjg1NV5BMl5BanBnXkFtZTcwNzA4ODcxNA@@._V1_.jpg", age: 43 },
+      { name: "Zendaya", desc: "Born 1996, a multi-talented star from Disney to Dune, she’s redefining cool.", reason: "Her vibe is fresh, fierce, and totally groovy.", photo: "https://m.media-amazon.com/images/M/MV5BMjAxZTQ1NjA4OV5BMl5BanBnXkFtZTgwODIzMjk5NTM@._V1_.jpg", age: 28 },
+      { name: "Anne Hathaway", desc: "Born 1982, she’s got range from princesses to gritty Oscar-winning roles.", reason: "Her smile and style are pure 70s magic.", photo: "https://m.media-amazon.com/images/M/MV5BNjQ3NWNjNmQtMTE5ZS00MDdmLTlkZjUtZTQ0ZmE5N2IxMmEzXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_.jpg", age: 42 }
+    ];
+
+    // Movie Logic
+    let movieIndex = 0;
+    function displayMovie(index) {
+      const movie = movies[index];
+      document.getElementById("movie-poster").src = movie.poster;
+      document.getElementById("movie-title").textContent = movie.title;
+      document.getElementById("movie-desc").textContent = movie.desc;
+      document.getElementById("movie-reason").textContent = movie.reason;
+    }
+    function generateNextMovie() {
+      movieIndex = (movieIndex + 1) % movies.length;
+      displayMovie(movieIndex);
+    }
+    displayMovie(movieIndex);
+
+    // Girl Logic
+    let girlIndex = 0;
+    function displayGirl(index) {
+      const girl = girls[index];
+      document.getElementById("girl-photo").src = girl.photo;
+      document.getElementById("girl-name").textContent = girl.name;
+      document.getElementById("girl-desc").textContent = girl.desc;
+      document.getElementById("girl-reason").textContent = girl.reason;
+    }
+    function generateNextGirl() {
+      girlIndex = (girlIndex + 1) % girls.length;
+      displayGirl(girlIndex);
+    }
+    displayGirl(girlIndex);
+
+    // Tab Functionality
+    function openTab(evt, tabName) {
+      const tabcontent = document.getElementsByClassName("tabcontent");
+      for (let i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      const tablinks = document.getElementsByClassName("tablinks");
+      for (let i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    // Open Movie tab by default
+    document.getElementById("defaultOpen").click();
+  </script>
+</body>
+</html>
