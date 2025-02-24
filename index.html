@@ -4,61 +4,147 @@
   <title>Daily Selections</title>
   <style>
     body {
-      font-family: 'Helvetica', Arial, sans-serif;
+      font-family: 'Orbitron', sans-serif;
       text-align: center;
-      background-color: #f8f9fa;
+      background: linear-gradient(135deg, #1e1e2f 0%, #2a4066 100%);
       padding: 40px;
       margin: 0;
-      color: #212529;
+      color: #e0e0e0;
+      overflow-x: hidden;
     }
     .tab {
-      overflow: hidden;
-      background-color: #343a40;
-      border-bottom: 2px solid #007bff;
+      display: flex;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px 0;
+      border-bottom: 2px solid #00d4ff;
+      box-shadow: 0 4px 15px rgba(0, 212, 255, 0.3);
     }
     .tab button {
-      font-family: 'Helvetica', Arial, sans-serif;
-      background-color: #343a40;
-      color: #ffffff;
-      float: left;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(45deg, #ff007a, #00d4ff);
+      color: #fff;
       border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 16px 24px;
+      padding: 15px 30px;
+      margin: 0 10px;
       font-size: 18px;
-      transition: background-color 0.3s;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 212, 255, 0.5);
     }
-    .tab button:hover { background-color: #495057; }
-    .tab button.active { background-color: #007bff; }
-    .tabcontent { display: none; padding: 30px; }
-    #movie-tab { background-color: #ffffff; }
-    #movie-tab h1 { font-size: 36px; color: #007bff; margin-bottom: 20px; }
-    .movie-box { background-color: #f1f3f5; padding: 25px; border: 1px solid #ced4da; border-radius: 8px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
-    #movie-tab h2 { font-size: 28px; color: #343a40; margin: 15px 0; }
-    #movie-tab p { font-size: 16px; line-height: 1.6; margin: 10px 0; }
-    #movie-tab img { max-width: 300px; height: auto; border: 1px solid #dee2e6; border-radius: 5px; margin-bottom: 20px; }
-    #movie-tab button { font-family: 'Helvetica', Arial, sans-serif; font-size: 16px; padding: 12px 20px; background-color: #007bff; color: #ffffff; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
-    #movie-tab button:hover { background-color: #0056b3; }
-    #girl-tab { background-color: #ffffff; }
-    #girl-tab h1 { font-size: 36px; color: #dc3545; margin-bottom: 20px; }
-    .girl-box { background-color: #f1f3f5; padding: 25px; border: 1px solid #ced4da; border-radius: 8px; max-width: 700px; margin: 0 auto; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); }
-    #girl-tab h2 { font-size: 28px; color: #343a40; margin: 15px 0; }
-    #girl-tab p { font-size: 16px; line-height: 1.6; margin: 10px 0; }
-    #girl-tab img { max-width: 300px; height: auto; border: 1px solid #dee2e6; border-radius: 5px; margin-bottom: 20px; }
-    #girl-tab button { font-family: 'Helvetica', Arial, sans-serif; font-size: 16px; padding: 12px 20px; background-color: #dc3545; color: #ffffff; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; }
-    #girl-tab button:hover { background-color: #b02a37; }
+    .tab button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(255, 0, 122, 0.7);
+    }
+    .tab button.active {
+      background: #fff;
+      color: #1e1e2f;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    }
+    .tabcontent {
+      display: none;
+      padding: 40px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    #movie-tab, #girl-tab, #quote-tab {
+      background: rgba(30, 30, 47, 0.9);
+      border-radius: 15px;
+      padding: 20px;
+    }
+    #movie-tab h1, #girl-tab h1, #quote-tab h1 {
+      font-size: 48px;
+      text-shadow: 0 0 10px rgba(0, 212, 255, 0.8);
+      margin-bottom: 30px;
+    }
+    #movie-tab h1 { color: #00d4ff; }
+    #girl-tab h1 { color: #ff007a; }
+    #quote-tab h1 { color: #ffd700; }
+    .movie-box, .girl-box, .quote-box {
+      background: linear-gradient(135deg, #2a4066, #1e1e2f);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 800px;
+      margin: 0 auto;
+      box-shadow: 0 10px 30px rgba(255, 0, 122, 0.3);
+      transition: transform 0.3s ease;
+    }
+    .movie-box { border: 2px solid #ff007a; }
+    .girl-box { border: 2px solid #00d4ff; }
+    .quote-box { border: 2px solid #ffd700; }
+    .movie-box:hover, .girl-box:hover, .quote-box:hover { transform: translateY(-10px); }
+    #movie-tab h2, #girl-tab h2, #quote-tab h2 {
+      font-size: 32px;
+      color: #fff;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+      margin: 20px 0;
+    }
+    #movie-tab p, #girl-tab p, #quote-tab p {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #d0d0d0;
+    }
+    #movie-tab img {
+      max-width: 300px;
+      height: auto;
+      border: 3px solid #00d4ff;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+    }
+    #girl-tab img {
+      max-width: 300px;
+      height: auto;
+      border: 3px solid #ff007a;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(255, 0, 122, 0.5);
+    }
+    #quote-tab blockquote {
+      font-size: 24px;
+      color: #ffd700;
+      text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+      margin: 20px 0;
+      padding: 20px;
+      border-left: 5px solid #ff007a;
+      background: rgba(255, 215, 0, 0.1);
+    }
+    #movie-tab button, #girl-tab button, #quote-tab button {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 18px;
+      padding: 15px 30px;
+      background: linear-gradient(45deg, #ff007a, #00d4ff);
+      color: #fff;
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(255, 0, 122, 0.5);
+      margin-top: 20px;
+    }
+    #movie-tab button:hover, #girl-tab button:hover, #quote-tab button:hover {
+      background: linear-gradient(45deg, #00d4ff, #ff007a);
+      transform: scale(1.1);
+    }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="tab">
     <button class="tablinks" onclick="openTab(event, 'movie-tab')" id="defaultOpen">Featured Film</button>
     <button class="tablinks" onclick="openTab(event, 'girl-tab')">Featured Celebrity</button>
+    <button class="tablinks" onclick="openTab(event, 'quote-tab')">Featured Goggins Quotes</button>
   </div>
 
   <div id="movie-tab" class="tabcontent">
     <h1>Featured Film</h1>
     <div class="movie-box">
-      <img id="movie-poster" src="https://via.placeholder.com/300x450?text=Film+Poster" alt="Film Poster">
+      <img id="movie-poster" src="https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" alt="Film Poster">
       <h2 id="movie-title">Loading...</h2>
       <p id="movie-desc">Please wait while we select your featured film.</p>
       <p><strong>Recommendation Insight:</strong> <span id="movie-reason">One moment...</span></p>
@@ -69,7 +155,7 @@
   <div id="girl-tab" class="tabcontent">
     <h1>Featured Celebrity</h1>
     <div class="girl-box">
-      <img id="girl-photo" src="https://via.placeholder.com/300x450?text=Celebrity+Photo" alt="Celebrity Photo">
+      <img id="girl-photo" src="https://image.tmdb.org/t/p/w500/5fX1oBR4sJ8hTRELG14dnR6TRkL.jpg" alt="Celebrity Photo">
       <h2 id="girl-name">Loading...</h2>
       <p id="girl-desc">Please wait while we select your featured celebrity.</p>
       <p><strong>Notable Qualities:</strong> <span id="girl-reason">One moment...</span></p>
@@ -77,84 +163,131 @@
     </div>
   </div>
 
+  <div id="quote-tab" class="tabcontent">
+    <h1>Featured Goggins Quotes</h1>
+    <div class="quote-box">
+      <blockquote id="quote-text">Loading...</blockquote>
+      <h2 id="quote-author">David Goggins</h2>
+      <button onclick="generateNextQuote()">Next Quote</button>
+    </div>
+  </div>
+
   <script>
     const movies = [
-      { title: "The Shawshank Redemption", desc: "A tale of two imprisoned men finding hope and redemption over decades.", reason: "Renowned for its emotional depth and enduring message.", poster: "https://m.media-amazon.com/images/M/MV5BNDE3ODcxYzMtY2YzZC00NmNlLWJiNDMtZDViZWM2MzIxZDYwXkEyXkFqcGdeQXVyNjAwNDUxODI@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Inception", desc: "A skilled thief infiltrates dreams to execute a high-stakes heist.", reason: "Celebrated for its innovative narrative and stunning visuals.", poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg" },
-      { title: "The Grand Budapest Hotel", desc: "A concierge navigates a comedic caper involving a stolen masterpiece.", reason: "Praised for its whimsical style and meticulous design.", poster: "https://m.media-amazon.com/images/M/MV5BMzM5NjUxOTEyMl5BMl5BanBnXkFtZTgwNjEyMDM0MDE@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Mad Max: Fury Road", desc: "A post-apocalyptic chase through a desolate wasteland.", reason: "Acclaimed for its relentless action and groundbreaking stunts.", poster: "https://m.media-amazon.com/images/M/MV5BN2EwM2I5OWMtMGQyMi00Zjg1LWJkNTctZTdjYTA4OGUwMmRkXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Spirited Away", desc: "A young girl’s journey through a mystical spirit world.", reason: "Noted for its imaginative animation and heartfelt storytelling.", poster: "https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctNDE2YS00YWE0LWE5ZWItZDBhYWQ0NTcxNWRhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Pulp Fiction", desc: "Interconnected stories of crime and redemption in LA.", reason: "Iconic for its dialogue and non-linear structure.", poster: "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg" },
-      { title: "The Dark Knight", desc: "Batman confronts the chaotic Joker in Gotham.", reason: "Lauded for its gripping intensity and Ledger’s performance.", poster: "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Forrest Gump", desc: "A man’s extraordinary life mirrors American history.", reason: "Beloved for its warmth and historical sweep.", poster: "https://m.media-amazon.com/images/M/MV5BNWIwODRlZTUtY2U3ZS00Yzg1LWJhNzMtMmZiYmEyNmU1NjMzXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg" },
-      { title: "The Matrix", desc: "A hacker discovers a simulated reality.", reason: "Revolutionary for its effects and philosophical depth.", poster: "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Good Will Hunting", desc: "A janitor’s genius is unlocked by therapy.", reason: "Admired for its emotional resonance and script.", poster: "https://m.media-amazon.com/images/M/MV5BNWI4ZDIyYjktNTFkZS00NWI5LWEzMDEtMzM5MTk3Mzc0YzVjXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg" },
-      { title: "The Godfather", desc: "A mafia dynasty navigates power and betrayal.", reason: "A benchmark for cinematic storytelling.", poster: "https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Jurassic Park", desc: "Revived dinosaurs wreak havoc on an island.", reason: "Groundbreaking effects and suspense.", poster: "https://m.media-amazon.com/images/M/MV5BMjM2MDgxMDg0Nl5BMl5BanBnXkFtZTgwNTM2OTM5NDE@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Titanic", desc: "A tragic love story aboard a doomed liner.", reason: "Epic scale and emotional impact.", poster: "https://m.media-amazon.com/images/M/MV5BMDdmZGU3NDQtY2E5My00ZTliLWIzOTUtMTY4ZGI1YjdiNjk3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Blade Runner", desc: "A future cop hunts rogue androids.", reason: "Visionary sci-fi aesthetics.", poster: "https://m.media-amazon.com/images/M/MV5BNzQzMzJhZTEtOWM4NS00MTdhLTg0YjgtMjM4MDRkZjUwZDBlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_FMjpg_UX1000_.jpg" },
-      { title: "The Lion King", desc: "A lion cub rises to reclaim his throne.", reason: "Timeless animation and music.", poster: "https://m.media-amazon.com/images/M/MV5BYTYxNGMyZTYtMjE3MS00MzNjLWFjNmYtMDk3N2FmM2JiM2M1XkEyXkFqcGdeQXVyNjY5NDU4NzI@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Fight Club", desc: "An insomniac forms a violent underground club.", reason: "Cult classic with raw energy.", poster: "https://m.media-amazon.com/images/M/MV5BMmEzNTkxYjQtZTc0MC00YTVjLTg5ZTEtZWMwOWVlYzY0NWIwXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Interstellar", desc: "Explorers seek a new planet for mankind.", reason: "Science meets human spirit.", poster: "https://m.media-amazon.com/images/M/MV5BZjdkOTU3MDktN2IxOS00OGYyLWFmMjktY2FiMmMxY2Y4NmM5XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Back to the Future", desc: "A teen time-travels via a DeLorean.", reason: "Classic adventure and humor.", poster: "https://m.media-amazon.com/images/M/MV5BZmU0M2Y1OGUtZjIxNi00ZjBkLTg1MjgtOWIyNThiZWIwYjRiXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg" },
-      { title: "The Empire Strikes Back", desc: "The Empire battles back against rebels.", reason: "Peak Star Wars storytelling.", poster: "https://m.media-amazon.com/images/M/MV5BYmU1NDRjNDgtMzhiMi00NjZmLTg5NGItZDNiZjU5NTU4OTE0XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_FMjpg_UX1000_.jpg" },
-      { title: "Parasite", desc: "A poor family cons a wealthy one.", reason: "Masterful social commentary.", poster: "https://m.media-amazon.com/images/M/MV5BYWZjMjk3ZTItODQ2ZC00NTY5LWE0ZDYtZTI3MjcwN2Q5NTVkXkEyXkFqcGdeQXVyODk4OTc3MTY@._V1_FMjpg_UX1000_.jpg" }
+      { title: "The Shawshank Redemption", desc: "A tale of two imprisoned men finding hope and redemption over decades.", reason: "Renowned for its emotional depth and enduring message.", poster: "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg" },
+      { title: "Inception", desc: "A skilled thief infiltrates dreams to execute a high-stakes heist.", reason: "Celebrated for its innovative narrative and stunning visuals.", poster: "https://image.tmdb.org/t/p/w500/oYuLEt3zVCKq57qu2FPDoxRSJBO.jpg" },
+      { title: "The Grand Budapest Hotel", desc: "A concierge navigates a comedic caper involving a stolen masterpiece.", reason: "Praised for its whimsical style and meticulous design.", poster: "https://image.tmdb.org/t/p/w500/eWdyYQreja6JGCzqHWXpWHDrr1h.jpg" },
+      { title: "Mad Max: Fury Road", desc: "A post-apocalyptic chase through a desolate wasteland.", reason: "Acclaimed for its relentless action and groundbreaking stunts.", poster: "https://image.tmdb.org/t/p/w500/8tZYtuWezp8JbcsvHYO0O4XoUWF.jpg" },
+      { title: "Spirited Away", desc: "A young girl’s journey through a mystical spirit world.", reason: "Noted for its imaginative animation and heartfelt storytelling.", poster: "https://image.tmdb.org/t/p/w500/39wmItIWsg5sZMyfWpz0H0NSSVG.jpg" },
+      { title: "Pulp Fiction", desc: "Interconnected stories of crime and redemption in LA.", reason: "Iconic for its dialogue and non-linear structure.", poster: "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg" },
+      { title: "The Dark Knight", desc: "Batman confronts the chaotic Joker in Gotham.", reason: "Lauded for its gripping intensity and Ledger’s performance.", poster: "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg" },
+      { title: "Forrest Gump", desc: "A man’s extraordinary life mirrors American history.", reason: "Beloved for its warmth and historical sweep.", poster: "https://image.tmdb.org/t/p/w500/saHP97rXYjJJCufPq2ly75IoXqw.jpg" },
+      { title: "The Matrix", desc: "A hacker discovers a simulated reality.", reason: "Revolutionary for its effects and philosophical depth.", poster: "https://image.tmdb.org/t/p/w500/f89U3ADr1Wk1vjbOPuV8tcioEs1.jpg" },
+      { title: "Good Will Hunting", desc: "A janitor’s genius is unlocked by therapy.", reason: "Admired for its emotional resonance and script.", poster: "https://image.tmdb.org/t/p/w500/bABCBZYBKAVzulubCluhI0KMQvv.jpg" },
+      { title: "The Godfather", desc: "A mafia dynasty navigates power and betrayal.", reason: "A benchmark for cinematic storytelling.", poster: "https://image.tmdb.org/t/p/w500/3bhkrj58Vtu7enYsRolD1fZdja1.jpg" },
+      { title: "Jurassic Park", desc: "Revived dinosaurs wreak havoc on an island.", reason: "Groundbreaking effects and suspense.", poster: "https://image.tmdb.org/t/p/w500/oU7zEHcyYxzl7vOH56dXEP4JDerr.jpg" },
+      { title: "Titanic", desc: "A tragic love story aboard a doomed liner.", reason: "Epic scale and emotional impact.", poster: "https://image.tmdb.org/t/p/w500/9xjZS2rlVxm8SFx8kPC3aIGCOYQ.jpg" },
+      { title: "Blade Runner", desc: "A future cop hunts rogue androids.", reason: "Visionary sci-fi aesthetics.", poster: "https://image.tmdb.org/t/p/w500/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg" },
+      { title: "The Lion King", desc: "A lion cub rises to reclaim his throne.", reason: "Timeless animation and music.", poster: "https://image.tmdb.org/t/p/w500/sKCr78MXSLixwmZ8DyJLrpMsd15.jpg" },
+      { title: "Fight Club", desc: "An insomniac forms a violent underground club.", reason: "Cult classic with raw energy.", poster: "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg" },
+      { title: "Interstellar", desc: "Explorers seek a new planet for mankind.", reason: "Science meets human spirit.", poster: "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg" },
+      { title: "Back to the Future", desc: "A teen time-travels via a DeLorean.", reason: "Classic adventure and humor.", poster: "https://image.tmdb.org/t/p/w500/fNOH9fE4HH0kG53g4SGdP147xYg.jpg" },
+      { title: "The Empire Strikes Back", desc: "The Empire battles back against rebels.", reason: "Peak Star Wars storytelling.", poster: "https://image.tmdb.org/t/p/w500/nNAe6BPHzluci0t2b9ksvNukKox.jpg" },
+      { title: "Parasite", desc: "A poor family cons a wealthy one.", reason: "Masterful social commentary.", poster: "https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg" }
     ];
 
     const girls = [
-      { name: "Scarlett Johansson", desc: "Born 1984, acclaimed for her work in blockbuster and independent cinema.", reason: "Versatile talent with global appeal.", photo: "https://m.media-amazon.com/images/M/MV5BMTM3OTUwMDYwNl5BMl5BanBnXkFtZTcwNTUyNzc3Nw@@._V1_FMjpg_UX1000_.jpg", age: 40 },
-      { name: "Margot Robbie", desc: "Born 1990, Australian actress known for dynamic roles across genres.", reason: "Rising star with commanding presence.", photo: "https://m.media-amazon.com/images/M/MV5BMTgxNDcwMzU2Nl5BMl5BanBnXkFtZTcwNDczMzMjNA@@._V1_FMjpg_UX1000_.jpg", age: 34 },
-      { name: "Natalie Portman", desc: "Born 1981, Academy Award winner with a diverse filmography.", reason: "Intellect and elegance in every role.", photo: "https://m.media-amazon.com/images/M/MV5BMTQ3ODE3Mjg1NV5BMl5BanBnXkFtZTcwNzA4ODcxNA@@._V1_FMjpg_UX1000_.jpg", age: 43 },
-      { name: "Zendaya", desc: "Born 1996, multi-hyphenate star of film, TV, and music.", reason: "Youthful energy and bold creativity.", photo: "https://m.media-amazon.com/images/M/MV5BMjAxZTQ1NjA4OV5BMl5BanBnXkFtZTgwODIzMjk5NTM@._V1_FMjpg_UX1000_.jpg", age: 28 },
-      { name: "Anne Hathaway", desc: "Born 1982, celebrated for her range from comedy to drama.", reason: "Consistent excellence and charm.", photo: "https://m.media-amazon.com/images/M/MV5BNjQ3NWNjNmQtMTE5ZS00MDdmLTlkZjUtZTQ0ZmE5N2IxMmEzXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_FMjpg_UX1000_.jpg", age: 42 },
-      { name: "Jessica Chastain", desc: "Born 1977, known for powerful performances in film.", reason: "Intensity and authenticity.", photo: "https://m.media-amazon.com/images/M/MV5BMTU1MDI2ODA0M15BMl5BanBnXkFtZTcwNzM2ODAzOQ@@._V1_FMjpg_UX1000_.jpg", age: 47 },
-      { name: "Gal Gadot", desc: "Born 1985, Israeli actress and model, star of action films.", reason: "Graceful strength and poise.", photo: "https://m.media-amazon.com/images/M/MV5BMjUzZTJmZDctODM2YS00N2EwLWIxNDItOGQ3N2I5OWQ5M2UyXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_FMjpg_UX1000_.jpg", age: 39 },
-      { name: "Emilia Clarke", desc: "Born 1986, British actress famed for fantasy epics.", reason: "Captivating screen presence.", photo: "https://m.media-amazon.com/images/M/MV5BNjg3OTg4MDczMl5BMl5BanBnXkFtZTgwODc0NzUwNjE@._V1_FMjpg_UX1000_.jpg", age: 38 },
-      { name: "Anya Taylor-Joy", desc: "Born 1996, breakout star of film and television.", reason: "Unique beauty and talent.", photo: "https://m.media-amazon.com/images/M/MV5BZGJiMGY4ZGQtOGUxYS00YzEwLTk2YzItODY4YjM5MDg5NTgyXkEyXkFqcGdeQXVyMTA3MDk2NDg2._V1_FMjpg_UX1000_.jpg", age: 28 },
-      { name: "Jennifer Lawrence", desc: "Born 1990, Oscar winner with a relatable persona.", reason: "Authenticity and star power.", photo: "https://m.media-amazon.com/images/M/MV5BOTU3NDE5MDQ4MV5BMl5BanBnXkFtZTgwMzE5ODQ3MDI@._V1_FMjpg_UX1000_.jpg", age: 34 },
-      { name: "Emma Stone", desc: "Born 1988, acclaimed for her versatility and wit.", reason: "Engaging and award-worthy.", photo: "https://m.media-amazon.com/images/M/MV5BMjI2MTU2NzM0MV5BMl5BanBnXkFtZTgwMzI4NzU2MjI@._V1_FMjpg_UX1000_.jpg", age: 36 },
-      { name: "Saoirse Ronan", desc: "Born 1994, Irish actress with critical acclaim.", reason: "Subtle brilliance on screen.", photo: "https://m.media-amazon.com/images/M/MV5BMjA4MzA3MTM5M15BMl5BanBnXkFtZTgwMzA5NzIwMDI@._V1_FMjpg_UX1000_.jpg", age: 30 },
-      { name: "Kristen Stewart", desc: "Born 1990, transitioned from teen roles to arthouse.", reason: "Bold and enigmatic.", photo: "https://m.media-amazon.com/images/M/MV5BMTcxNDY2MzAyMV5BMl5BanBnXkFtZTcwMTcwODQwNA@@._V1_FMjpg_UX1000_.jpg", age: 34 },
-      { name: "Blake Lively", desc: "Born 1987, known for style and screen roles.", reason: "Effortless elegance.", photo: "https://m.media-amazon.com/images/M/MV5BMTY2NTk2Mjg5MV5BMl5BanBnXkFtZTcwMjAwMjA4NA@@._V1_FMjpg_UX1000_.jpg", age: 37 },
-      { name: "Rachel McAdams", desc: "Born 1978, versatile in romance and drama.", reason: "Warmth and skill.", photo: "https://m.media-amazon.com/images/M/MV5BMTY5ODk1NzUyMl5BMl5BanBnXkFtZTgwMjUyNzEyMTE@._V1_FMjpg_UX1000_.jpg", age: 46 },
-      { name: "Florence Pugh", desc: "Born 1996, rising star with bold choices.", reason: "Fearless and fresh.", photo: "https://m.media-amazon.com/images/M/MV5BMjIzOTA0NzczNV5BMl5BanBnXkFtZTgwMjMwMzQ0NzM@._V1_FMjpg_UX1000_.jpg", age: 29 },
-      { name: "Mila Kunis", desc: "Born 1983, blends comedy and drama effortlessly.", reason: "Charismatic versatility.", photo: "https://m.media-amazon.com/images/M/MV5BODg4NzA2NzEwMV5BMl5BanBnXkFtZTcwODY4ODQ5Ng@@._V1_FMjpg_UX1000_.jpg", age: 41 },
-      { name: "Olivia Wilde", desc: "Born 1984, actress and filmmaker.", reason: "Sharp intellect and beauty.", photo: "https://m.media-amazon.com/images/M/MV5BMjA5NzUwNzM3N15BMl5BanBnXkFtZTcwMTMzOTQyNw@@._V1_FMjpg_UX1000_.jpg", age: 40 },
-      { name: "Hailee Steinfeld", desc: "Born 1996, singer and actress with range.", reason: "Youthful star on the rise.", photo: "https://m.media-amazon.com/images/M/MV5BMjMwNDM1MTA0N15BMl5BanBnXkFtZTgwOTM1NDM1ODE@._V1_FMjpg_UX1000_.jpg", age: 28 },
-      { name: "Emily Blunt", desc: "Born 1983, British actress with broad appeal.", reason: "Refined talent and poise.", photo: "https://m.media-amazon.com/images/M/MV5BMTUxNjkwODczN15BMl5BanBnXkFtZTcwODMwODY1OQ@@._V1_FMjpg_UX1000_.jpg", age: 42 }
+      { name: "Jess Bush", desc: "Born 1992, an Australian actress with a distinctive presence. Notable films: 'Skinford,' 'Playing House,' 'Star Trek: Strange New Worlds.'", reason: "Brings a fresh and captivating energy to her roles.", photo: "https://image.tmdb.org/t/p/w500/5fX1oBR4sJ8hTRELG14dnR6TRkL.jpg", age: 32 },
+      { name: "Jessie Mei Li", desc: "Born 1995, a British actress known for her compelling performances. Notable films: 'Shadow and Bone,' 'Last Night in Soho,' 'All About Eve.'", reason: "A rising star with depth and charm.", photo: "https://image.tmdb.org/t/p/w500/6rK8J8qA0RMHNYhT95uB8tLmWnq.jpg", age: 29 },
+      { name: "Stephanie Beatriz", desc: "Born 1981, an Argentine-American actress with a bold vibe. Notable films: 'Brooklyn Nine-Nine,' 'Encanto,' 'In the Heights.'", reason: "Delivers humor and heart effortlessly.", photo: "https://image.tmdb.org/t/p/w500/ey1QogmHqz8FBN82rXPHZcHgk3F.jpg", age: 44 },
+      { name: "Karla Souza", desc: "Born 1985, a Mexican actress with striking talent. Notable films: 'How to Get Away with Murder,' 'We Are the Nobles,' 'Day Shift.'", reason: "A powerful presence in drama and comedy.", photo: "https://image.tmdb.org/t/p/w500/yMcuuGGbH5ksS8zsS7kS2p8wOHk.jpg", age: 39 },
+      { name: "Lilly Singh", desc: "Born 1988, a Canadian actress and creator with a vibrant spirit. Notable films: 'Bad Moms,' 'Fahrenheit 451,' 'The Bad Guys.'", reason: "Infuses energy and wit into every project.", photo: "https://image.tmdb.org/t/p/w500/3idMweuH8ZqGTkOnwTdvAZr7rEx.jpg", age: 36 },
+      { name: "Tati Gabrielle", desc: "Born 1996, an American actress with a fierce edge. Notable films: 'Chilling Adventures of Sabrina,' 'You,' 'The 100.'", reason: "Commands attention with her intensity.", photo: "https://image.tmdb.org/t/p/w500/zF77fRlfpJ6SYtFzBceX6kaB8Iu.jpg", age: 29 },
+      { name: "Adria Arjona", desc: "Born 1992, a Puerto Rican actress with a captivating allure. Notable films: 'Morbius,' 'Andor,' 'Pacific Rim: Uprising.'", reason: "A versatile talent on the rise.", photo: "https://image.tmdb.org/t/p/w500/h3iem38MOGPrYLNp8ugrKSNFljF.jpg", age: 32 },
+      { name: "Letitia Wright", desc: "Born 1993, a Guyanese-British actress with grace. Notable films: 'Black Panther,' 'Urban Hymn,' 'The Silent Twins.'", reason: "Shines with strength and subtlety.", photo: "https://image.tmdb.org/t/p/w500/1uM2DWfxHZaafVzua7QwnNDs0cl.jpg", age: 31 },
+      { name: "Madeleine Mantock", desc: "Born 1990, a British actress with poise. Notable films: 'Charmed,' 'The Tomorrow People,' 'Edge of Tomorrow.'", reason: "A steady and engaging performer.", photo: "https://image.tmdb.org/t/p/w500/zb5R4dx3grmv3yA4e5XtwE3nG8P.jpg", age: 34 },
+      { name: "Sonoya Mizuno", desc: "Born 1986, a Japanese-British actress with elegance. Notable films: 'Ex Machina,' 'Crazy Rich Asians,' 'Devs.'", reason: "Brings a unique grace to every role.", photo: "https://image.tmdb.org/t/p/w500/oTAnvKzrbjDvhWZnKxS5mWsomuA.jpg", age: 38 },
+      { name: "Kiki Layne", desc: "Born 1991, an American actress with soulful depth. Notable films: 'If Beale Street Could Talk,' 'The Old Guard,' 'Coming 2 America.'", reason: "A powerful and emotive talent.", photo: "https://image.tmdb.org/t/p/w500/6uT8QTSl13Co7Nh28fY4rU3PpWv.jpg", age: 33 },
+      { name: "Rosa Salazar", desc: "Born 1985, an American actress with a fierce spirit. Notable films: 'Alita: Battle Angel,' 'Maze Runner,' 'Bird Box.'", reason: "Delivers intensity and grit.", photo: "https://image.tmdb.org/t/p/w500/wLMSWBIYIX3jZQHMST01zAMeYkS.jpg", age: 39 },
+      { name: "Olga Kurylenko", desc: "Born 1979, a Ukrainian-French actress with striking beauty. Notable films: 'Quantum of Solace,' 'Oblivion,' 'The Courier.'", reason: "A versatile and magnetic star.", photo: "https://image.tmdb.org/t/p/w500/8fLyyR2jBsA6vaBy6RhT75nC40N.jpg", age: 45 },
+      { name: "Eiza Gonzalez", desc: "Born 1990, a Mexican actress with bold appeal. Notable films: 'Baby Driver,' 'Alita: Battle Angel,' 'I Care a Lot.'", reason: "A dynamic force in action and drama.", photo: "https://image.tmdb.org/t/p/w500/w2rEVXYg6X7Zh9ESo9VbgzWdvEZ.jpg", age: 35 },
+      { name: "Anna Diop", desc: "Born 1988, a Senegalese-American actress with strength. Notable films: 'Titans,' 'Us,' '24: Legacy.'", reason: "Radiates power and presence.", photo: "https://image.tmdb.org/t/p/w500/1wLMT9yGATZekBexiSjsD0vKxKp.jpg", age: 37 },
+      { name: "Celeste O'Connor", desc: "Born 1998, an American actress with youthful vigor. Notable films: 'Ghostbusters: Afterlife,' 'Freaky,' 'The In Between.'", reason: "A rising star with infectious energy.", photo: "https://image.tmdb.org/t/p/w500/xbG8xJgfZ5XvQJ8CkZFoWlyg9zV.jpg", age: 26 },
+      { name: "Lola Kirke", desc: "Born 1990, a British-American actress with quirky charm. Notable films: 'Mistress America,' 'Gone Girl,' 'American Made.'", reason: "Brings a distinctive edge to her roles.", photo: "https://image.tmdb.org/t/p/w500/5bV7jRihbgEN7KGEzhMYzUYxKUM.jpg", age: 34 },
+      { name: "Nichole Sakura", desc: "Born 1989, an American actress with warmth. Notable films: 'Superstore,' 'Shameless,' 'Everything Before Us.'", reason: "A relatable and engaging talent.", photo: "https://image.tmdb.org/t/p/w500/9kElovt1k3ZCX24cQJqO8tWZa5k.jpg", age: 35 },
+      { name: "Sarah Gadon", desc: "Born 1987, a Canadian actress with subtlety. Notable films: 'Enemy,' 'Dracula Untold,' 'Alias Grace.'", reason: "Delivers nuanced and haunting performances.", photo: "https://image.tmdb.org/t/p/w500/5nphdonnxhXY3TIYdBvxXGs8nEq.jpg", age: 37 },
+      { name: "Betty Gabriel", desc: "Born 1981, an American actress with intensity. Notable films: 'Get Out,' 'The Purge: Election Year,' 'Unfriended: Dark Web.'", reason: "A standout in suspense and drama.", photo: "https://image.tmdb.org/t/p/w500/8Vpqg2e9mVz7ajG6lXc68A86Yut.jpg", age: 44 }
+    ];
+
+    const quotes = [
+      { text: "Bluds don't get comfortable with their weaknesses, they push past 'em.", author: "David Goggins" },
+      { text: "Blud's mind will quit a hundred times before his body ever does.", author: "David Goggins" },
+      { text: "Blud's gotta suffer to grow, it ain't supposed to feel good all the time.", author: "David Goggins" },
+      { text: "When blud thinks blud's done, he's only at 40% of what he can really do.", author: "David Goggins" },
+      { text: "Blud don't rise to the occasion, they fall to the level of your training.", author: "David Goggins" },
+      { text: "Blud's greatest weapon is his mind, you gotta master it.", author: "David Goggins" },
+      { text: "Blud can't run from his demons, blud's gotta face 'em head on.", author: "David Goggins" },
+      { text: "The only way blud gets better is by doing what blud doesn't wanna do.", author: "David Goggins" },
+      { text: "Blud's comfort zone is his enemy, stay out of it blud.", author: "David Goggins" },
+      { text: "Bluds don't need motivation bluds need discipline.", author: "David Goggins" },
+      { text: "Pain unlocks a secret doorway in his mind that blud didn't know existed.", author: "David Goggins" },
+      { text: "Blud's not here to be average blud's here to be uncommon.", author: "David Goggins" },
+      { text: "Blud's gotta callus his mind like he calluses his hands.", author: "David Goggins" },
+      { text: "The worst thing blud can do is quit on himself.", author: "David Goggins" },
+      { text: "His struggle is blud's strength embrace it bruh.", author: "David Goggins" },
+      { text: "Blud doesn't find his limits blud creates 'em.", author: "David Goggins" },
+      { text: "Every day blud wakes up, blud's gotta take his soul back.", author: "David Goggins" },
+      { text: "His body can stand almost anything—it's blud's mind he's gotta convince.", author: "David Goggins" },
+      { text: "Blud don't get stronger by avoiding shit blud get stronger by going through shit.", author: "David Goggins" },
+      { text: "His past don't define blud, blud's actions right now do.", author: "David Goggins" }
     ];
 
     let movieIndex = 0;
+    let girlIndex = 0;
+    let quoteIndex = 0;
+
     function displayMovie(index) {
       const movie = movies[index];
       const poster = document.getElementById("movie-poster");
+      poster.onerror = null; // Clear any previous handler
       poster.src = movie.poster;
-      poster.onerror = () => { poster.src = "https://via.placeholder.com/300x450?text=Film+Poster+Not+Found"; }; // Fallback
+      poster.onerror = () => { poster.src = "https://placekitten.com/300/450"; };
       document.getElementById("movie-title").textContent = movie.title;
       document.getElementById("movie-desc").textContent = movie.desc;
       document.getElementById("movie-reason").textContent = movie.reason;
     }
-    function generateNextMovie() {
-      movieIndex = (movieIndex + 1) % movies.length;
-      displayMovie(movieIndex);
-    }
-    displayMovie(movieIndex);
 
-    let girlIndex = 0;
     function displayGirl(index) {
       const girl = girls[index];
       const photo = document.getElementById("girl-photo");
+      photo.onerror = null; // Clear any previous handler
       photo.src = girl.photo;
-      photo.onerror = () => { photo.src = "https://via.placeholder.com/300x450?text=Celebrity+Photo+Not+Found"; }; // Fallback
+      photo.onerror = () => { photo.src = "https://placekitten.com/300/450"; };
       document.getElementById("girl-name").textContent = girl.name;
       document.getElementById("girl-desc").textContent = girl.desc;
       document.getElementById("girl-reason").textContent = girl.reason;
     }
+
+    function displayQuote(index) {
+      const quote = quotes[index];
+      document.getElementById("quote-text").textContent = quote.text;
+      document.getElementById("quote-author").textContent = quote.author;
+    }
+
+    function generateNextMovie() {
+      movieIndex = (movieIndex + 1) % movies.length;
+      displayMovie(movieIndex);
+    }
+
     function generateNextGirl() {
       girlIndex = (girlIndex + 1) % girls.length;
       displayGirl(girlIndex);
     }
-    displayGirl(girlIndex);
+
+    function generateNextQuote() {
+      quoteIndex = (quoteIndex + 1) % quotes.length;
+      displayQuote(quoteIndex);
+    }
 
     function openTab(evt, tabName) {
       const tabcontent = document.getElementsByClassName("tabcontent");
@@ -163,8 +296,13 @@
       for (let i = 0; i < tablinks.length; i++) { tablinks[i].className = tablinks[i].className.replace(" active", ""); }
       document.getElementById(tabName).style.display = "block";
       evt.currentTarget.className += " active";
+
+      if (tabName === "movie-tab") displayMovie(movieIndex);
+      else if (tabName === "girl-tab") displayGirl(girlIndex);
+      else if (tabName === "quote-tab") displayQuote(quoteIndex);
     }
 
+    displayMovie(movieIndex);
     document.getElementById("defaultOpen").click();
   </script>
 </body>
